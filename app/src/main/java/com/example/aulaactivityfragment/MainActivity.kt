@@ -23,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         buttonAbrir = findViewById( R.id.btnAbrirNovaTela)
         buttonAbrir.setOnClickListener {
             val intent = Intent(this, DetalhesActivity::class.java)
+
+            intent.putExtra("Filme", "The Witcher")
+            intent.putExtra("Classificação", 12)
+            intent.putExtra("Avaliações", 9.5)
+
             startActivity(intent)
         }
 

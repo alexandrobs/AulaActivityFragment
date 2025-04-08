@@ -3,6 +3,7 @@ package com.example.aulaactivityfragment
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,6 +14,7 @@ private const val TAG: String = "DetalhesActivity"
 class DetalhesActivity : AppCompatActivity() {
 
     lateinit var buttonFechar: Button
+    lateinit var txtDetalhes: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,17 @@ class DetalhesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detalhes)
 
         buttonFechar = findViewById( R.id.btnFechar)
+        txtDetalhes = findViewById( R.id.tv_detalhes)
+
+        val bundle = intent.extras
+        if (bundle != null) {
+            val filme = bundle.getString("Filme")
+            val classificacao = bundle.getInt("Classificação")
+            val avaliacao = bundle.getDouble("Avaliações")
+
+            val resultado = "Filme: $filme - Classificação: $classificacao - Avaliação: $avaliacao"
+            txtDetalhes.text = resultado
+        }
 
         buttonFechar.setOnClickListener {
             finish()
