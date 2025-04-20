@@ -28,6 +28,16 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("Classificação", 12)
             intent.putExtra("Avaliações", 9.5)
 
+            val filme = Filme(
+                "Sem limites",
+                "Teste",
+                4.8,
+                "Jamilton",
+                "Netflix"
+            )
+
+            intent.putExtra("filme", filme)
+
             startActivity(intent)
         }
 

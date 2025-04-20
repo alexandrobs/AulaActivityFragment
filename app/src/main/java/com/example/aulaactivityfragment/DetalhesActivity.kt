@@ -1,5 +1,6 @@
 package com.example.aulaactivityfragment
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -26,12 +27,23 @@ class DetalhesActivity : AppCompatActivity() {
 
         val bundle = intent.extras
         if (bundle != null) {
-            val filme = bundle.getString("Filme")
-            val classificacao = bundle.getInt("Classificação")
-            val avaliacao = bundle.getDouble("Avaliações")
+//            val filme = bundle.getString("Filme")
+//            val classificacao = bundle.getInt("Classificação")
+//            val avaliacao = bundle.getDouble("Avaliações")
 
-            val resultado = "Filme: $filme - Classificação: $classificacao - Avaliação: $avaliacao"
-            txtDetalhes.text = resultado
+//            val resultado = "Filme: $filme - Classificação: $classificacao - Avaliação: $avaliacao"
+
+//            txtDetalhes.text = resultado
+
+            val filme = if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                //bundle.getSerializable("filme", Filme::class.java)
+                bundle.getParcelable("filme", Filme::class.java)
+            } else {
+                //bundle.getSerializable("filme") as Filme
+                bundle.getSerializable("filme") as Filme
+            }
+            txtDetalhes.text = "${filme?.nome} - ${filme?.distribuidor}"
+            //txtDetalhes.text = "$filme"
         }
 
         buttonFechar.setOnClickListener {
